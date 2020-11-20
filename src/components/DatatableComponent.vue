@@ -35,7 +35,7 @@ export default {
       loading: true,
       options: {},
       headers: [
-        { text: "NOmbre del pasagero", value: "name" },
+        { text: "Nombre del pasajero", value: "name" },
         { text: "Numero de viajes", value: "trips" },
         { text: "Aerolinea", value: "airline[0].name" },
         { text: "Logo", value: "logo" },
