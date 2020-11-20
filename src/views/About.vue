@@ -1,23 +1,9 @@
 <template>
   <div class="about pa-10">
-    <h1>Sobre nosotros..</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente in
-      similique maxime sunt laborum numquam, molestias maiores voluptas neque
-      voluptatem voluptate dolorum debitis molestiae repellat perspiciatis qui
-      possimus magnam nulla!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente in
-      similique maxime sunt laborum numquam, molestias maiores voluptas neque
-      voluptatem voluptate dolorum debitis molestiae repellat perspiciatis qui
-      possimus magnam nulla!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente in
-      similique maxime sunt laborum numquam, molestias maiores voluptas neque
-      voluptatem voluptate dolorum debitis molestiae repellat perspiciatis qui
-      possimus magnam nulla!
+    <h1>Sobre esta app...</h1>
+    <p class="text-justify text--primary">
+      No dejes de hacer cosas porque te olvidaste. Esta app te ayudará a
+      mantenerte siempre atento a tus tareas mas impoprtantes.
     </p>
   </div>
 </template>

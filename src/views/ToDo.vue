@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       //la data del campo de texto que agrega tareas
-      newTask: "hola",
+      newTask: "",
       // pongo un array de tareas
       tareas: [
         {
@@ -68,8 +68,8 @@ export default {
           description: "Levantarse",
           done: false,
         },
-        { id: 2, description: "Rezar", done: false },
-        { id: 3, description: "Ejercitar", done: false },
+        /*   { id: 2, description: "Rezar", done: false },
+        { id: 3, description: "Ejercitar", done: false }, */
       ],
     };
   },
