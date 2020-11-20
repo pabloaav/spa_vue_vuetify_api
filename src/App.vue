@@ -33,7 +33,7 @@
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Tareas... No te olvides</v-toolbar-title>
+      <v-toolbar-title>Cada vez más cerca de tus metas</v-toolbar-title>
 
       <v-spacer></v-spacer>
     </v-app-bar>
