@@ -3,8 +3,8 @@
     <v-navigation-drawer v-model="drawer" app>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title"> ToDos App </v-list-item-title>
-          <v-list-item-subtitle> Remember everithig </v-list-item-subtitle>
+          <v-list-item-title class="title"> Tareas App </v-list-item-title>
+          <v-list-item-subtitle> Justo DO IT </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -26,11 +26,11 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Cosas por hacer</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-      <!--  -->
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
@@ -40,7 +40,8 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { title: "Tareas", icon: "mdi-list-status" },
+      { title: "Dashboard", icon: "mdi-list-status" },
+
       { title: "About", icon: "mdi-help-box" },
     ],
   }),
