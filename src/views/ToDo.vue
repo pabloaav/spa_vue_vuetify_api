@@ -65,7 +65,7 @@ export default {
       tareas: [
         {
           id: 1,
-          description: "Levantarse",
+          description: "Deployando en GitHub Pages",
           done: false,
         },
         /*   { id: 2, description: "Rezar", done: false },
