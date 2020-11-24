@@ -90,12 +90,27 @@ export default {
       this.newTask = "";
     },
     /**
-     * metodo que cambia el check de la tarea
+     * metodo que cambia el check de la tarea y modifica en db el valor del campo done
      */
     doneTask(id) {
-      let tarea = this.tareas.filter((tarea) => tarea.id === id)[0];
-      tarea.done = !tarea.done;
-      // console.log(tarea.done);
+      // let tarea = this.tareas.filter((tarea) => tarea.id === id)[0];
+      // tarea.done = !tarea.done;
+      //Modificar en la db la tarea como hecha
+      let tareaHecha = db.collection("ToDos").doc(id);
+
+      return tareaHecha
+        .update({
+          done: true,
+        })
+        .then(function() {
+          console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+
+      // console.log(tarea.id);
     },
     /**
      * metodo que filtra la data para que se quite la tarea que se quiere eliminar
@@ -116,11 +131,13 @@ export default {
         this.newTask = "";
       }
     },
-  },
+  }, //fin de methods
   // Se pone una referencia a la db como propiedad de export default, para vincular el array de tareas con la DB y que sea dinamico:
-
   firestore: {
     tareas: db.collection("ToDos"),
+  },
+  created() {
+    console.log(this.tareas);
   },
 };
 </script>
