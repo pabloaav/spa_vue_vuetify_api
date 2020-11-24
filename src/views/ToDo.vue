@@ -93,8 +93,8 @@ export default {
      * metodo que cambia el check de la tarea y modifica en db el valor del campo done
      */
     doneTask(id) {
-      // let tarea = this.tareas.filter((tarea) => tarea.id === id)[0];
-      // tarea.done = !tarea.done;
+      let tarea = this.tareas.filter((tarea) => tarea.id === id)[0];
+      tarea.done = !tarea.done;
       //Modificar en la db la tarea como hecha
       let tareaHecha = db.collection("ToDos").doc(id);
 
@@ -113,10 +113,24 @@ export default {
       // console.log(tarea.id);
     },
     /**
-     * metodo que filtra la data para que se quite la tarea que se quiere eliminar
+     * metodo que filtra la data para que se quite la tarea que se quiere eliminar.
+     * Adicionalmente, borramos de la base de datos la tarea
      */
     deleteTask(id) {
       this.tareas = this.tareas.filter((tarea) => tarea.id !== id);
+
+      //procedesmos a borrar de la db
+      let tareaBorrar = db.collection("ToDos").doc(id);
+
+      //Para hacer mejor lectura del codigo, guardamos en una variable la referencia a la tarea (document en firestore), que queremos borrar para luego aplicar la funcion de borrado. Puede ser todo en una linea como plantea la documentacion pero es menos legible:
+      tareaBorrar
+        .delete()
+        .then(function() {
+          console.log("Document successfully deleted!");
+        })
+        .catch(function(error) {
+          console.error("Error removing document: ", error);
+        });
     },
     /**
      * para subir a la db de firebase
