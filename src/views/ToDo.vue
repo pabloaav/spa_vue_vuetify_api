@@ -48,7 +48,7 @@
             <!-- el boton de eliminar -->
             <v-list-item-action>
               <!-- con stop detenemos que tome como que se hizo click en todo el componente padre o elemento padre -->
-              <v-btn @click.stop="deleteTask(tarea.id)" icon>
+              <v-btn @click.stop="mostrarDialog" icon>
                 <v-icon color="red lighten-1">mdi-delete</v-icon>
               </v-btn>
             </v-list-item-action>
@@ -56,6 +56,30 @@
         </v-list-item>
       </v-list>
     </v-card>
+
+    <!-- Dialogo emergente para dar por seguro el borrado -->
+    <v-dialog v-model="dialog" persistent max-width="400">
+      <v-card>
+        <v-card-title>
+          Vas a eliminar la tarea?
+        </v-card-title>
+        <v-card-text>
+          Si optas por aceptar, tu tarea se borrará de la base de
+          datos</v-card-text
+        >
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="dialog = false">
+            Cancelar
+          </v-btn>
+          <v-btn color="green darken-1" text @click="dialog = false">
+            Aceptar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- ------ fin del dialog -------- -->
   </div>
 </template>
 
@@ -78,6 +102,8 @@ export default {
           done: false,
         }, */
       ],
+      //la propiedad que activa o no el dialog de eliminar tareas
+      dialog: false,
     };
   },
   methods: {
@@ -105,7 +131,7 @@ export default {
 
       return tareaHecha
         .update({
-          done: true,
+          done: tarea.done,
         })
         .then(function() {
           console.log("Document successfully updated!");
@@ -150,13 +176,15 @@ export default {
         this.newTask = "";
       }
     },
+    mostrarDialog() {
+      this.dialog = true;
+
+      console.log(this.tareas);
+    },
   }, //fin de methods
   // Se pone una referencia a la db como propiedad de export default, para vincular el array de tareas con la DB y que sea dinamico:
   firestore: {
     tareas: db.collection("ToDos"),
-  },
-  created() {
-    console.log(this.tareas);
   },
 };
 </script>
