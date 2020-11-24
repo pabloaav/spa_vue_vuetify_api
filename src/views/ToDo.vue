@@ -5,8 +5,8 @@
     <!-- @keyup.enter="addTask" hace que al presionar enter se ejecute adherir tarea -->
     <v-text-field
       v-model="newTask"
-      @click:append="addTask"
-      @keyup.enter="addTask"
+      @click:append="addTaskToDb"
+      @keyup.enter="addTaskToDb"
       class="pa-2"
       outlined
       label="Nueva Tarea"
@@ -66,13 +66,12 @@ export default {
       newTask: "",
       // pongo un array de tareas
       tareas: [
+        //esto es la forma estatica de probar datos en el array
         /*  {
           id: 1,
           description: "Deployando en GitHub Pages",
           done: false,
         }, */
-        /*   { id: 2, description: "Rezar", done: false },
-        { id: 3, description: "Ejercitar", done: false }, */
       ],
     };
   },
@@ -118,9 +117,10 @@ export default {
       }
     },
   },
-  //Se pone una referencia a la db como propiedad de export default
+  // Se pone una referencia a la db como propiedad de export default, para vincular el array de tareas con la DB y que sea dinamico:
+
   firestore: {
-    ToDos: db.collection("ToDos"),
+    tareas: db.collection("ToDos"),
   },
 };
 </script>
