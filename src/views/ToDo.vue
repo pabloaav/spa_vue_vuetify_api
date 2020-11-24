@@ -55,6 +55,9 @@
 </template>
 
 <script>
+//hacemos un import de la constante db para manejar firebase:
+import { db } from "../firebase/db";
+
 export default {
   name: "Home",
   data() {
@@ -63,11 +66,11 @@ export default {
       newTask: "",
       // pongo un array de tareas
       tareas: [
-        {
+        /*  {
           id: 1,
           description: "Deployando en GitHub Pages",
           done: false,
-        },
+        }, */
         /*   { id: 2, description: "Rezar", done: false },
         { id: 3, description: "Ejercitar", done: false }, */
       ],
@@ -101,6 +104,23 @@ export default {
     deleteTask(id) {
       this.tareas = this.tareas.filter((tarea) => tarea.id !== id);
     },
+    /**
+     * para subir a la db de firebase
+     */
+    // se le debe porne la propiedad async
+    async addTaskToDb() {
+      if (this.newTask) {
+        //lo que va entre aprentesis es el nombre de la coleccion
+        await db
+          .collection("ToDos")
+          .add({ description: this.newTask, done: false });
+        this.newTask = "";
+      }
+    },
+  },
+  //Se pone una referencia a la db como propiedad de export default
+  firestore: {
+    ToDos: db.collection("ToDos"),
   },
 };
 </script>
