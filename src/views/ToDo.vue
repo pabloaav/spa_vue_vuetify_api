@@ -17,7 +17,12 @@
     <v-divider></v-divider>
     <v-card max-width="475" class="mx-auto">
       <v-list subheader flat>
-        <v-subheader>Listas de tareas To Do...</v-subheader>
+        <v-subheader v-if="tareas.length > 0"
+          >Listas de tareas To Do...</v-subheader
+        >
+        <v-subheader v-else>
+          Excelente! no tienes tareas por hacer. Agregalas aqui...</v-subheader
+        >
         <v-divider></v-divider>
         <v-list-item
           v-for="tarea in tareas"
