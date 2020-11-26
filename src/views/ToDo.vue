@@ -48,7 +48,7 @@
             <!-- el boton de eliminar -->
             <v-list-item-action>
               <!-- con stop detenemos que tome como que se hizo click en todo el componente padre o elemento padre -->
-              <v-btn @click.stop="modalEliminar(tarea.id)" icon>
+              <v-btn @click.stop="modalEliminar(tarea.id, tarea.done)" icon>
                 <v-icon color="red lighten-1">mdi-delete</v-icon>
               </v-btn>
             </v-list-item-action>
@@ -63,10 +63,7 @@
         <v-card-title>
           Vas a eliminar la tarea?
         </v-card-title>
-        <v-card-text>
-          Si optas por aceptar, tu tarea se borrará de la base de
-          datos</v-card-text
-        >
+        <v-card-text> Tu tarea está sin marcar como hecha.</v-card-text>
         <v-text-field v-model="tarea.id" hidden></v-text-field>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -177,9 +174,13 @@ export default {
         this.newTask = "";
       }
     },
-    modalEliminar(id) {
-      this.dialog = true;
-      this.tarea.id = id;
+    modalEliminar(id, done) {
+      if (!done) {
+        this.dialog = true;
+        this.tarea.id = id;
+      } else {
+        this.deleteTask(id);
+      }
     },
   }, //fin de methods
   // Se pone una referencia a la db como propiedad de export default, para vincular el array de tareas con la DB y que sea dinamico:
