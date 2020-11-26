@@ -64,7 +64,7 @@
           Vas a eliminar la tarea?
         </v-card-title>
         <v-card-text> Tu tarea está sin marcar como hecha.</v-card-text>
-        <v-text-field v-model="tarea.id" hidden></v-text-field>
+        <!-- <v-text-field v-model="tarea.id" hidden></v-text-field> -->
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="dialog = false">
