@@ -48,7 +48,7 @@
             <!-- el boton de eliminar -->
             <v-list-item-action>
               <!-- con stop detenemos que tome como que se hizo click en todo el componente padre o elemento padre -->
-              <v-btn @click.stop="mostrarDialog" icon>
+              <v-btn @click.stop="modalEliminar(tarea.id)" icon>
                 <v-icon color="red lighten-1">mdi-delete</v-icon>
               </v-btn>
             </v-list-item-action>
@@ -67,12 +67,13 @@
           Si optas por aceptar, tu tarea se borrará de la base de
           datos</v-card-text
         >
+        <v-text-field v-model="tarea.id" hidden></v-text-field>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="dialog = false">
             Cancelar
           </v-btn>
-          <v-btn color="green darken-1" text @click="dialog = false">
+          <v-btn color="green darken-1" text @click="deleteTask(tarea.id)">
             Aceptar
           </v-btn>
         </v-card-actions>
@@ -93,15 +94,14 @@ export default {
     return {
       //la data del campo de texto que agrega tareas
       newTask: "",
-      // pongo un array de tareas
-      tareas: [
-        //esto es la forma estatica de probar datos en el array
-        /*  {
-          id: 1,
-          description: "Deployando en GitHub Pages",
-          done: false,
-        }, */
-      ],
+      //  un array de tareas que guarda lo obtenido en DB
+      tareas: [],
+      //un JSON con los datos de una tarea
+      tarea: {
+        id: null,
+        description: "",
+        done: null,
+      },
       //la propiedad que activa o no el dialog de eliminar tareas
       dialog: false,
     };
@@ -148,7 +148,7 @@ export default {
      * Adicionalmente, borramos de la base de datos la tarea
      */
     deleteTask(id) {
-      this.tareas = this.tareas.filter((tarea) => tarea.id !== id);
+      // this.tareas = this.tareas.filter((tarea) => tarea.id !== id);
 
       //procedesmos a borrar de la db
       let tareaBorrar = db.collection("ToDos").doc(id);
@@ -162,6 +162,7 @@ export default {
         .catch(function(error) {
           console.error("Error removing document: ", error);
         });
+      this.dialog = false;
     },
     /**
      * para subir a la db de firebase
@@ -176,10 +177,9 @@ export default {
         this.newTask = "";
       }
     },
-    mostrarDialog() {
+    modalEliminar(id) {
       this.dialog = true;
-
-      console.log(this.tareas);
+      this.tarea.id = id;
     },
   }, //fin de methods
   // Se pone una referencia a la db como propiedad de export default, para vincular el array de tareas con la DB y que sea dinamico:
